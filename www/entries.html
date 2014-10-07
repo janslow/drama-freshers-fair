@@ -1,0 +1,59 @@
+<html manifest="cache.manifest">
+<head>
+  <title>Entries</title>
+  <style>
+    body {
+      margin: 20px;
+    }
+    #output {
+      width: 100%;
+      display: block;
+      height: 100px;
+    }
+  </style>
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <a href="form.html">Back to form</a></a>
+  
+  <textarea id="output" disabled="disabled"></textarea>
+
+  <button id="delete">Delete entries</button>
+  <button id="save">Save entries to file</button>
+  <button id="email">Email entries</button>
+
+  <script src="js/external/jquery-2.1.1.min.js"></script>
+
+  <script>
+    $("#output").text(window.localStorage.getItem("entries")).select();
+
+    $("#delete").click(function () {
+      if (window.confirm("Are you sure you want to permanently delete all entries?")) {
+        window.localStorage.removeItem("entries");
+        window.location.reload();
+      }
+    });
+    function email(text) {
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'mailto:jay.anslow@tabsareforflying.co.uk?subject=FreshersFairEntries&body=' + encodeURIComponent(text));
+      pom.click();
+    }
+
+    $("#save").click(function () {
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(window.localStorage.getItem("entries")));
+      pom.setAttribute('download', "entries.json");
+      pom.click();
+    });
+
+    $("#email").click(function () {
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'mailto:jay.anslow@tabsareforflying.co.uk?subject=FreshersFairEntries&body=' + encodeURIComponent(window.localStorage.getItem("entries")));
+      pom.click();
+    });
+  </script>
+</body>
+</html>
