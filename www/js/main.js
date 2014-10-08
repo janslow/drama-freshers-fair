@@ -24,7 +24,7 @@ var checkForm;
       }
     }
   };
-  $.each(["acting", "directing", "producing", "marketing", "sm-pm", "lx-sound", "design"], function (i, interest) {
+  $.each(["watching", "acting", "directing", "producing", "marketing", "sm-pm", "lx-sound", "design", "musician"], function (i, interest) {
     fields["interest-" + interest] = {
       "input": $("#interest-" + interest),
       "process": function (field, value) {
